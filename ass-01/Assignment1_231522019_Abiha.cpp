@@ -175,3 +175,40 @@ void moveTiles(int board[fixed_size][fixed_size], int& score, int rowDirr, int c
         addNewTile(); // Add a new tile to the board
     }
 }
+
+// Function for the main loop
+void mainLoop() {
+    int row1, col1, row2, col2;
+    char input;
+
+    initBoard(); // Initialize the board with two starting tiles
+    displayBoard(); // Display the board
+    score = 0; // Resetting score
+    
+    while (true) {
+        if (isGameOver()) { // Check if the game is over
+            cout << "\nGame over! Your score: " << score << endl;
+            if (score > highScore) highScore = score;
+            cout << "High score: " << highScore << endl;
+            break; // Exit the loop if the game is over
+        }
+        // Move tiles based on keyboard input
+        if (GetAsyncKeyState(VK_UP) != 0) {
+            moveTiles(board, score, -1, 0); // Move tiles up
+            displayBoard();
+        }
+        else if (GetAsyncKeyState(VK_DOWN) != 0) {
+            moveTiles(board, score, 1, 0);  // Move tiles down
+            displayBoard(); 
+        }
+        else if (GetAsyncKeyState(VK_LEFT) != 0) {
+            moveTiles(board, score, 0, -1); // Move tiles left
+            displayBoard();
+        }
+        else if (GetAsyncKeyState(VK_RIGHT) != 0) {
+            moveTiles(board, score, 0, 1);  // Move tiles left
+            displayBoard();
+        }
+        if (score > highScore) highScore = score;
+    }
+}
