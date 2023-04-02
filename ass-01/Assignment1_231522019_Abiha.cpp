@@ -63,3 +63,41 @@ void displayBoard() {
     }        
     cout << "\nTIP: Use Arrow Keys to Move.";
 }
+
+bool isGameOver() {
+    // Game is over if a 2048 tile is detected
+    for (int i = 0; i < fixed_size; i++) {     // for i in range(fixed_size) [ROWS]
+        for (int j = 0; j < fixed_size; j++) { // for j in range(fixed_size) [COLUMNS]
+            if (board[i][j] == 2048) {
+                return true;
+            }
+        }
+    }
+
+    // Game is over if there are no more moves possible
+    for (int i = 0; i < fixed_size; i++) {     // for i in range(fixed_size) [ROWS]
+        for (int j = 0; j < fixed_size; j++) { // for j in range(fixed_size) [COLUMNS]
+            // GAME is NOT over IF
+            if (board[i][j] == 0) { // There are empty spaces to be filled
+                return false;
+            }
+            // There is a matching tile above or to the left, the game is not over
+            if (i != 0 && board[i][j] == board[i - 1][j]) { // Above
+                return false;
+            }
+            if (j != 0 && board[i][j] == board[i][j - 1]) { // Left
+                return false;
+            }
+            // There is a matching tile below or to the right, the game is not over
+            if (i != fixed_size - 1 && board[i][j] == board[i + 1][j]) { // Below
+                return false;
+            }
+            if (j != fixed_size - 1 && board[i][j] == board[i][j + 1]) { // Right 
+                return false;
+            }
+        }
+    }
+
+    // If the code reaches here, there are no empty spaces and no matching tiles, the game is over
+    return true;
+}
