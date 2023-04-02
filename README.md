@@ -11,9 +11,9 @@ This is a simple implementation of the popular 2048 game, coded in C++. The game
 
 **How to run:**
 
-- Clone the repository to your local machine.
-- Open a terminal and navigate to the repository folder.
-- Compile the program by running g++ Assignment1_231522019_Abiha.cpp -o 2048.exe in the terminal.
+- Download the file 'Assignment1_231522019_Abiha.cpp' to your device.
+- Open a terminal and 'cd' to the folder it was downloaded.
+- Compile the program by running 'g++ Assignment1_231522019_Abiha.cpp' -o 2048.exe in the terminal.
 - Run the program by running 2048.exe.
 
 **How to play:**
