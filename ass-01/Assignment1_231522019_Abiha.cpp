@@ -126,3 +126,52 @@ void addNewTile() {
     int col = emptyCells[randomIndex][1];
     board[row][col] = randomValue; // Setting the random value to the random empty cell.
 }
+
+// Function which takes info from keyborad input and moves the tiles within the board (respectively)
+void moveTiles(int board[fixed_size][fixed_size], int& score, int rowDirr, int colDirr) { // rowDirr and colDirr specify which direction to move
+    bool isMoved = false;
+
+    // Slide tiles as far as possible in the given direction
+    for (int times = 0; times < 4; times++) {       // to make sure it slides all tiles
+        for (int i = 0; i < fixed_size; i++) {      // for i in range(fixed_size) [ROWS]
+            for (int j = 0; j < fixed_size; j++) {  // for j in range(fixed_size) [COLUMNS]
+                // Finding the new position for the selected tile
+                int newRow = i + rowDirr;  
+                int newCol = j + colDirr;
+
+                // Check if tile is not empty and new position is within the board
+                if (board[i][j] != 0 && newRow >= 0 && newRow < fixed_size && newCol >= 0 && newCol < fixed_size) {
+                    // Keep sliding the tile until it reaches an empty spot or a tile with a different value
+                    while (newRow >= 0 && newRow < fixed_size && newCol >= 0 && newCol < fixed_size) {
+                        if (board[newRow][newCol] == 0) {
+                            // Slide tile to new position
+                            board[newRow][newCol] = board[i][j];
+                            board[i][j] = 0;
+                            i = newRow;
+                            j = newCol;
+                            newRow += rowDirr;
+                            newCol += colDirr;
+                            isMoved = true; // A tile has been moved
+                        }
+                        else if (board[newRow][newCol] == board[i][j]) {
+                            // Merge tiles with same value
+                            board[newRow][newCol] += board[i][j];
+                            score += board[newRow][newCol]; // Add merged tile value to the score
+                            board[i][j] = 0;
+                            isMoved = true; // A tile has been moved
+                            break;
+                        }
+                        else {
+                            // Stop sliding
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    // Add a new tile if any tiles were moved 
+    if (isMoved) { // only adding in case tiles were moved, unless adding at all times makes it messy and unplayable
+        addNewTile(); // Add a new tile to the board
+    }
+}
