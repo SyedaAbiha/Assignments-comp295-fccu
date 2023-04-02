@@ -45,3 +45,21 @@ void initBoard() {
     board[x1][y1] = (rand() % 2 + 1) * 2; 
     board[x2][y2] = (rand() % 2 + 1) * 2;
 }
+
+// Function to display the board on the console
+void displayBoard() {
+    system("cls"); // Clearing the console (purging previous output)    
+    cout << "Score: " << score << "|  High Score: " << highScore << "\n=========================\n";
+    for (int i = 0; i < fixed_size; i++) {     // for i in range(fixed_size) [ROWS]
+        for (int j = 0; j < fixed_size; j++) { // for j in range(fixed_size) [COLUMNS]
+            int tile = board[i][j];
+            if (tile == 0) {
+                cout << "|     ";
+            } else {
+                cout << "|  " << board[i][j] << "  ";
+            }
+        }
+        cout << "|\n-------------------------" << endl;
+    }        
+    cout << "\nTIP: Use Arrow Keys to Move.";
+}
