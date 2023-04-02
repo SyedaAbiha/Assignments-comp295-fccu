@@ -101,3 +101,28 @@ bool isGameOver() {
     // If the code reaches here, there are no empty spaces and no matching tiles, the game is over
     return true;
 }
+
+// Function to add a new random tile (with either 2 or 4) to the board
+void addNewTile() {
+    // Find all empty cells within the board
+
+    int emptyCells[fixed_size * fixed_size][2]; // An Array which visually tells us location of empty cells (0s) starting from the top left, going towards bottom right
+    int count = 0; // 
+    for (int i = 0; i < fixed_size; i++) {      // for i in range(fixed_size) [ROWS]
+        for (int j = 0; j < fixed_size; j++) {  // for j in range(fixed_size) [COLUMNS]
+            if (board[i][j] == 0) {             // If empty cell is detected
+                emptyCells[count][0] = i;       // Store its 'x' position
+                emptyCells[count][1] = j;       // Store its 'y' position
+                count++;
+            }
+        }
+    }
+
+    // Choose a random empty cell and add a new tile
+    srand(time(NULL));
+    int randomIndex = rand() % count;
+    int randomValue = (rand() % 2 + 1) * 2; // Generates either 2 or 4
+    int row = emptyCells[randomIndex][0]; 
+    int col = emptyCells[randomIndex][1];
+    board[row][col] = randomValue; // Setting the random value to the random empty cell.
+}
