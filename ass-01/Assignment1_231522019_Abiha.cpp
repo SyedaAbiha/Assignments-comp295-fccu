@@ -212,3 +212,38 @@ void mainLoop() {
         if (score > highScore) highScore = score;
     }
 }
+
+int main() {
+    srand(time(NULL));
+    char input;
+    while (true) {
+        system("cls");
+        cout << "-----------------------" << endl;
+        cout << "       2048 Game" << endl;
+        cout << "-----------------------" << endl;        
+        cout << "1. Start" << endl;
+        cout << "2. Instructions" << endl;
+        cout << "3. Quit" << endl;
+        cin >> input;
+        switch (input) {
+        case '1':
+            int TEMP;
+            mainLoop();
+            cout << "Press ENTER to go back to main menu (to play again)";
+            cin >> TEMP;
+            break;
+        case '2': // Instructions
+            system("cls");
+            cout << "-----------------------" << endl;
+            cout << "     INSTRUCTIONS" << endl;
+            cout << "-----------------------" << endl;
+            cout << "Use the arrow keys to move the tiles. All tiles slide as far as\npossible in the chosen direction, until they are stopped by either\nanother tile or the edge of the grid. If two tiles of the same number\ncollide while moving, they merge into a single tile with the total\nvalue of the two tiles. The objective of the game is to combine tiles\nwith the same number to create a tile with the number 2048. The game\nends when the player reaches the 2048 tile or there are no more\npossible moves." << endl;
+            cout << "\nPress any key to go back to main menu." << endl;
+            system("pause>nul");
+            break;
+        case '3': // Quit
+            return 0;
+            break;
+        }
+    }
+}
